@@ -5,6 +5,13 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript service template app.
 
+## Setup
+After you clone this template, you will want to replace all the variations of "ServiceTemplate" with whatever your new service is called in the same case:
+ - `ServiceTemplate`
+ - `Service Template`
+ - `service-template`
+ - `service_template`
+
 ## Installation
 
 ```bash
