@@ -32,7 +32,8 @@ $ make prod_server
 ```
 
 ### Swagger UI
-Once the app is running, you can inspect the API with Swagger UI at [http://localhost:3000/api/](http://localhost:3000/api/)
+Once the app is running, you can test the API with Swagger UI at [http://localhost:3000/api/](http://localhost:3000/api/)
+You can download the OAS(swagger) schema at: [http://localhost:3000/api-json](http://localhost:3000/api-json)
 
 <img width="519" alt="Screen Shot 2020-11-06 at 11 26 09 AM" src="https://user-images.githubusercontent.com/1145493/98396165-ebaea400-2022-11eb-87b9-90aa048545dc.png">
 ## Test
