@@ -1,6 +1,6 @@
 # ServiceTemplate
-<a href="https://codeclimate.com/repos/5f9eed8824e75e018c001cba/maintainability"><img src="https://api.codeclimate.com/v1/badges/600342c8241524648927/maintainability" /></a>
-<a href="https://codeclimate.com/repos/5f9eed8824e75e018c001cba/test_coverage"><img src="https://api.codeclimate.com/v1/badges/600342c8241524648927/test_coverage" /></a>
+<a href="https://codeclimate.com/repos/5fa587adbb48fb3c68005285/maintainability"><img src="https://api.codeclimate.com/v1/badges/9fa1a1b132d225bbea0c/maintainability" /></a>
+<a href="https://codeclimate.com/repos/5fa587adbb48fb3c68005285/test_coverage"><img src="https://api.codeclimate.com/v1/badges/9fa1a1b132d225bbea0c/test_coverage" /></a>
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript Policy Admin app.

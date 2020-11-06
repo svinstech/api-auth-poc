@@ -1,0 +1,88 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+jobs:
+  e2e-test:
+    environment:
+      CC_TEST_REPORTER_ID: af54080dae6a24b0ed28e7ed6b11493deee4dde8368c9dc8a678ec52e0a3e4ec
+    docker:
+      - image: cimg/node:15.0.1
+        environment:
+          DATABASE_HOST: localhost
+          DATABASE_PORT: 5432
+          DATABASE_NAME: service_template_test
+          DATABASE_USERNAME: service_template_app
+          DATABASE_PASSWORD: service_template_app
+          DATABASE_SYNC: true
+      - image: postgres:12.4-alpine
+        environment:
+          POSTGRES_DB: service_template_test
+          POSTGRES_USER: service_template_app
+          POSTGRES_PASSWORD: service_template_app
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Install Code Climate Test Reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run: ./cc-test-reporter before-build
+      - run:
+          name: Run End to End Tests
+          command: make e2e_coverage
+      - run: ./cc-test-reporter format-coverage coverage-e2e/lcov.info -t lcov -o "coverage-e2e/codeclimate.$CIRCLE_NODE_INDEX.json"
+      - run: ./cc-test-reporter sum-coverage --output - coverage-e2e/codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          when: always
+  unit-test:
+    docker:
+      - image: cimg/node:15.0.1
+        environment:
+          DATABASE_HOST: localhost
+          DATABASE_PORT: 5432
+          DATABASE_NAME: service_template_test
+          DATABASE_USERNAME: service_template_app
+          DATABASE_PASSWORD: service_template_app
+          DATABASE_SYNC: true
+      - image: postgres:12.4-alpine
+        environment:
+          POSTGRES_DB: service_template_test
+          POSTGRES_USER: service_template_app
+          POSTGRES_PASSWORD: service_template_app
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Run Unit Tests
+          command: make unit_test
+workflows:
+  service-template-flow:
+    jobs:
+      - unit-test
+      - e2e-test
