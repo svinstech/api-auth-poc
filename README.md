@@ -34,8 +34,7 @@ $ make prod_server
 ### Swagger UI
 Once the app is running, you can inspect the API with Swagger UI at [http://localhost:3000/api/](http://localhost:3000/api/)
 
-<img width="786" alt="Swagger UI" src="https://user-images.githubusercontent.com/1145493/97812801-8ab15580-1c49-11eb-9071-0d87c525093d.png">
-
+<img width="519" alt="Screen Shot 2020-11-06 at 11 26 09 AM" src="https://user-images.githubusercontent.com/1145493/98396165-ebaea400-2022-11eb-87b9-90aa048545dc.png">
 ## Test
 
 ```bash
