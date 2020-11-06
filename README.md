@@ -11,6 +11,7 @@ After you clone this template, you will want to replace all the variations of "S
  - `Service Template`
  - `service-template`
  - `service_template`
+ - `SERVICE_TEMPLATE`
 
 ## Installation
 
