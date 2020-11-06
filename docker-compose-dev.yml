@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:12.4-alpine
+    volumes:
+      - ./tmp/postgres:/var/lib/postgresql/data
+      - ./docker/pg:/docker-entrypoint-initdb.d
+    ports:
+      - "${DATABASE_PORT}:5432"
+    environment:
+      - "POSTGRES_DB=${DATABASE_NAME}"
+      - "POSTGRES_USER=${DATABASE_USERNAME}"
+      - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
+      - "SERVICE_TEMPLATE_POSTGRES_USER=${DATABASE_USERNAME}"
+      - "SERVICE_TEMPLATE_POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
+      - "SERVICE_TEMPLATE_POSTGRES_DATABASE=${DATABASE_NAME}"
+  db_test:
+    image: postgres:12.4-alpine
+    volumes:
+      - ./tmp/postgres-test:/var/lib/postgresql/data
+      - ./docker/pg:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+    environment:
+      - "POSTGRES_DB=${DATABASE_NAME_TEST}"
+      - "POSTGRES_USER=${DATABASE_USERNAME}"
+      - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
+      - "SERVICE_TEMPLATE_POSTGRES_USER=${DATABASE_USERNAME}"
+      - "SERVICE_TEMPLATE_POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
+      - "SERVICE_TEMPLATE_POSTGRES_DATABASE=${DATABASE_NAME_TEST}"
