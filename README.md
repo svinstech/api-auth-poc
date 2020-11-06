@@ -3,7 +3,7 @@
 <a href="https://codeclimate.com/repos/5fa587adbb48fb3c68005285/test_coverage"><img src="https://api.codeclimate.com/v1/badges/9fa1a1b132d225bbea0c/test_coverage" /></a>
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript Service Template app.
+[Nest](https://github.com/nestjs/nest) framework TypeScript service template app.
 
 ## Installation
 
