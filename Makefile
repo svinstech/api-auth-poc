@@ -1,3 +1,5 @@
+DD_API_KEY := $(shell eval AWS_PROFILE=svinstech_dev CHAMBER_KMS_KEY_ALIAS=stg_chamber chamber read stg-global dd_api_key --quiet)
+
 .PHONY: .setup_db clean_db coverage destroy_db dev_db debug_server dev_server e2e_coverage e2e_test format install \
 lint prod_serverserver stop stop_db test unit_test
 COMPOSE_PROJECT_NAME ?= service-template
@@ -12,12 +14,17 @@ coverage:
 	yarn run test:cov
 
 destroy_db:
-	COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME) \
+	@echo "Tearing down docker-compose..."
+	@COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME) \
+		DD_API_KEY=$(DD_API_KEY) \
 		docker-compose -f docker-compose-dev.yml down
+	@echo "...Finished"
 
 dev_db: .setup_db
-	COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME) \
+	@echo "Bringing up docker-compose..."
+	@COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME) \
 		docker-compose -f docker-compose-dev.yml up -d
+	@echo "...Finished"
 
 debug_server:
 	yarn run start:debug

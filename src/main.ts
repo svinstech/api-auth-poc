@@ -1,3 +1,4 @@
+import 'dd-trace/init'; // this must be imported first to enable automatic instrumentation
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from "@nestjs/common";
