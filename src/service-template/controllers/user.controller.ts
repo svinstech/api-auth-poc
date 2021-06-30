@@ -7,19 +7,20 @@ import {
     Param,
     Post,
     Put,
-    UseInterceptors
+    UseInterceptors,
 } from '@nestjs/common';
-import { UserService } from "../services/user.service";
-import { User } from "../entities/user.entity";
-import { ApiInternalServerErrorResponse, ApiNotFoundResponse } from "@nestjs/swagger";
-import { UpdateUserDto } from "../dtos/update-user.dto";
-import { CreateUserDto } from "../dtos/create-user.dto";
+import { UserService } from '../services/user.service';
+import { User } from '../entities/user.entity';
+import {
+    ApiInternalServerErrorResponse,
+    ApiNotFoundResponse,
+} from '@nestjs/swagger';
+import { UpdateUserDto } from '../dtos/update-user.dto';
+import { CreateUserDto } from '../dtos/create-user.dto';
 
 @Controller('users')
 export class UserController {
-    constructor(private userService: UserService) {
-
-    }
+    constructor(private userService: UserService) {}
 
     @UseInterceptors(ClassSerializerInterceptor)
     @Post()

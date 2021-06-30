@@ -1,49 +1,48 @@
-version: "3"
+version: '3'
 
 services:
-  db:
-    image: postgres:12.4-alpine
-    volumes:
-      - ./tmp/postgres:/var/lib/postgresql/data
-      - ./docker/pg:/docker-entrypoint-initdb.d
-    ports:
-      - "${DATABASE_PORT}:5432"
-    environment:
-      - "POSTGRES_DB=${DATABASE_NAME}"
-      - "POSTGRES_USER=${DATABASE_USERNAME}"
-      - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
-      - "SERVICE_TEMPLATE_POSTGRES_USER=${DATABASE_USERNAME}"
-      - "SERVICE_TEMPLATE_POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
-      - "SERVICE_TEMPLATE_POSTGRES_DATABASE=${DATABASE_NAME}"
-  db_test:
-    image: postgres:12.4-alpine
-    volumes:
-      - ./tmp/postgres-test:/var/lib/postgresql/data
-      - ./docker/pg:/docker-entrypoint-initdb.d
-    ports:
-      - "${DATABASE_PORT_TEST}:5432"
-    environment:
-      - "POSTGRES_DB=${DATABASE_NAME_TEST}"
-      - "POSTGRES_USER=${DATABASE_USERNAME}"
-      - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
-      - "SERVICE_TEMPLATE_POSTGRES_USER=${DATABASE_USERNAME}"
-      - "SERVICE_TEMPLATE_POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
-      - "SERVICE_TEMPLATE_POSTGRES_DATABASE=${DATABASE_NAME_TEST}"
-  datadog:
-    image: gcr.io/datadoghq/agent:7
-    ports:
-      - "127.0.0.1:${DD_PORT}:8126/tcp"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker/sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
-      - /tmp/datadog-agent/run:/opt/datadog-agent/run:rw
-    environment:
-      DD_API_KEY: ${DD_API_KEY}
-      DD_APM_ENABLED: "true"
-      DD_LOGS_ENABLED: "true"
-      DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: "true"
-      DD_CONTAINER_EXCLUDE_LOGS: "name:datadog-agent"
-      DD_PROCESS_AGENT_ENABLED: "true"
-
+    db:
+        image: postgres:12.4-alpine
+        volumes:
+            - ./tmp/postgres:/var/lib/postgresql/data
+            - ./docker/pg:/docker-entrypoint-initdb.d
+        ports:
+            - '${DATABASE_PORT}:5432'
+        environment:
+            - 'POSTGRES_DB=${DATABASE_NAME}'
+            - 'POSTGRES_USER=${DATABASE_USERNAME}'
+            - 'POSTGRES_PASSWORD=${DATABASE_PASSWORD}'
+            - 'SERVICE_TEMPLATE_POSTGRES_USER=${DATABASE_USERNAME}'
+            - 'SERVICE_TEMPLATE_POSTGRES_PASSWORD=${DATABASE_PASSWORD}'
+            - 'SERVICE_TEMPLATE_POSTGRES_DATABASE=${DATABASE_NAME}'
+    db_test:
+        image: postgres:12.4-alpine
+        volumes:
+            - ./tmp/postgres-test:/var/lib/postgresql/data
+            - ./docker/pg:/docker-entrypoint-initdb.d
+        ports:
+            - '${DATABASE_PORT_TEST}:5432'
+        environment:
+            - 'POSTGRES_DB=${DATABASE_NAME_TEST}'
+            - 'POSTGRES_USER=${DATABASE_USERNAME}'
+            - 'POSTGRES_PASSWORD=${DATABASE_PASSWORD}'
+            - 'SERVICE_TEMPLATE_POSTGRES_USER=${DATABASE_USERNAME}'
+            - 'SERVICE_TEMPLATE_POSTGRES_PASSWORD=${DATABASE_PASSWORD}'
+            - 'SERVICE_TEMPLATE_POSTGRES_DATABASE=${DATABASE_NAME_TEST}'
+    datadog:
+        image: gcr.io/datadoghq/agent:7
+        ports:
+            - '127.0.0.1:${DD_PORT}:8126/tcp'
+        volumes:
+            - /var/run/docker.sock:/var/run/docker/sock:ro
+            - /proc/:/host/proc/:ro
+            - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+            - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+            - /tmp/datadog-agent/run:/opt/datadog-agent/run:rw
+        environment:
+            DD_API_KEY: ${DD_API_KEY}
+            DD_APM_ENABLED: 'true'
+            DD_LOGS_ENABLED: 'true'
+            DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: 'true'
+            DD_CONTAINER_EXCLUDE_LOGS: 'name:datadog-agent'
+            DD_PROCESS_AGENT_ENABLED: 'true'
