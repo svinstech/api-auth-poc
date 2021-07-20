@@ -23,6 +23,7 @@ destroy_db:
 dev_db: .setup_db
 	@echo "Bringing up docker-compose..."
 	@COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME) \
+		DD_API_KEY=$(DD_API_KEY) \
 		docker-compose -f docker-compose-dev.yml up -d
 	@echo "...Finished"
 
