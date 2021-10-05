@@ -12,6 +12,7 @@ After you clone this template, you will want to replace all the variations of "S
  - `service-template`
  - `service_template`
  - `SERVICE_TEMPLATE`
+ - `typescript-service-template`
 
 Your build will likely fail on FOSSA the first time. Visit FOSSA App and configure your new Project, following [https://vouchinc.atlassian.net/wiki/spaces/EPAD/pages/1752989726/FOSSA](step 4 here).
 

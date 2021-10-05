@@ -86,7 +86,7 @@ jobs:
           command: make unit_test
 
   check_licenses:
-    working_directory: /home/circleci/service_template_app
+    working_directory: /home/circleci/typescript-service-template
     docker:
       - image: cimg/node:15.14.0
     steps:
