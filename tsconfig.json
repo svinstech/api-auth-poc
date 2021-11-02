@@ -11,19 +11,17 @@
         "outDir": "./dist",
         "baseUrl": "./",
         "incremental": true,
-
-        // make it strict!
-        "alwaysStrict": true,
+        "strict": true,
         "forceConsistentCasingInFileNames": true,
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
         "noUnusedParameters": true,
         "noUnusedLocals": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "strictNullChecks": true,
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        // added in Typescript 4.4 this should be true when we move up
+        //"exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true
     }
 }

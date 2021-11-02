@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { join } from 'path';
 
 const DEFAULT_DB_PORT = 5432;
 
@@ -23,7 +22,10 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
             username: this.configService.get('DATABASE_USERNAME'),
             password: this.configService.get('DATABASE_PASSWORD'),
             database: this.configService.get('DATABASE_NAME'),
-            entities: [join(__dirname, '../entities/*.entity.{ts,js}')],
+            entities:
+                process.env.NODE_ENV === 'test'
+                    ? ['**/*.entity.{ts}']
+                    : ['**/*.entity.{ts,js}'],
             synchronize: this.configService.get('DATABASE_SYNC') === 'true',
             namingStrategy: new SnakeNamingStrategy(),
         };
