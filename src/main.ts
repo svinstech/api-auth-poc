@@ -15,6 +15,10 @@ async function bootstrap() {
         .build();
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('api', app, document);
+
+    // Adding path prefix at the global level.
+    app.setGlobalPrefix('api/v1');
+
     await app.listen(3000);
 }
 

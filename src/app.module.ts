@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { ServiceTemplateModule } from './service-template/service-template.module';
-import { TypeOrmConfigService } from './service-template/services/type-orm-config.service';
+import { APIAuthPOCModule } from './api-auth-poc/api-auth-poc.module';
+import { AuthModule } from './auth/auth.module';
 
 const ENV = process.env.NODE_ENV;
 
@@ -12,10 +11,8 @@ const ENV = process.env.NODE_ENV;
             isGlobal: true,
             envFilePath: !ENV ? '.env' : `.env.${ENV}`,
         }),
-        TypeOrmModule.forRootAsync({
-            useClass: TypeOrmConfigService,
-        }),
-        ServiceTemplateModule,
+        APIAuthPOCModule,
+        AuthModule,
     ],
 })
 export class AppModule {}
