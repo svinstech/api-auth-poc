@@ -12,15 +12,15 @@ jobs:
               environment:
                   DATABASE_HOST: localhost
                   DATABASE_PORT: 5432
-                  DATABASE_NAME: service_template_test
-                  DATABASE_USERNAME: service_template_app
-                  DATABASE_PASSWORD: service_template_app
+                  DATABASE_NAME: api_auth_poc_test
+                  DATABASE_USERNAME: api_auth_poc_app
+                  DATABASE_PASSWORD: api_auth_poc_app
                   DATABASE_SYNC: true
             - image: postgres:12.4-alpine
               environment:
-                  POSTGRES_DB: service_template_test
-                  POSTGRES_USER: service_template_app
-                  POSTGRES_PASSWORD: service_template_app
+                  POSTGRES_DB: api_auth_poc_test
+                  POSTGRES_USER: api_auth_poc_app
+                  POSTGRES_PASSWORD: api_auth_poc_app
         steps:
             - checkout
             - restore_cache:
@@ -60,15 +60,15 @@ jobs:
               environment:
                   DATABASE_HOST: localhost
                   DATABASE_PORT: 5432
-                  DATABASE_NAME: service_template_test
-                  DATABASE_USERNAME: service_template_app
-                  DATABASE_PASSWORD: service_template_app
+                  DATABASE_NAME: api_auth_poc_test
+                  DATABASE_USERNAME: api_auth_poc_app
+                  DATABASE_PASSWORD: api_auth_poc_app
                   DATABASE_SYNC: true
             - image: postgres:12.4-alpine
               environment:
-                  POSTGRES_DB: service_template_test
-                  POSTGRES_USER: service_template_app
-                  POSTGRES_PASSWORD: service_template_app
+                  POSTGRES_DB: api_auth_poc_test
+                  POSTGRES_USER: api_auth_poc_app
+                  POSTGRES_PASSWORD: api_auth_poc_app
         steps:
             - checkout
             - restore_cache:
@@ -100,7 +100,7 @@ jobs:
                       ./cc-test-reporter after-build -t lcov
 
     check_licenses:
-        working_directory: /home/circleci/typescript-service-template
+        working_directory: /home/circleci/typescript-api-auth-poc
         docker:
             - image: cimg/node:14.17.0
         steps:
@@ -127,7 +127,7 @@ jobs:
                   no_output_timeout: 30m
 
 workflows:
-    service-template-flow:
+    api-auth-poc-flow:
         jobs:
             - unit-test
             - e2e-test

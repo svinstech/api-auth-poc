@@ -2,7 +2,7 @@ DD_API_KEY := $(shell eval AWS_PROFILE=svinstech_dev CHAMBER_KMS_KEY_ALIAS=stg_c
 
 .PHONY: .setup_db clean_db coverage destroy_db dev_db debug_server dev_server e2e_coverage e2e_test format install \
 lint prod_serverserver stop stop_db test unit_test
-COMPOSE_PROJECT_NAME ?= service-template
+COMPOSE_PROJECT_NAME ?= api-auth-poc
 
 .setup_db:
 	mkdir -p tmp/postgres
