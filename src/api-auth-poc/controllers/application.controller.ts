@@ -16,7 +16,7 @@ export class ApplicationController {
     @UseGuards(AuthGuard('jwt'))
     @Get('/private')
     privateResponse(@Request() req: any): any {
-        /* In the request object we now have the context of the claims like below
+        /* In the request object we now have the context of partner & user like below
             req.user = {
                 partnerKey = "kxrODb3qdrkyHMvq3fBOVxneID7OX5QW"
                 userInfo: {
